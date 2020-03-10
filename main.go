@@ -45,8 +45,8 @@ type Config struct {
 	ReferrerPolicy string
 }
 
-// Helmet ...
-func Helmet(config ...Config) func(*fiber.Ctx) {
+// New ...
+func New(config ...Config) func(*fiber.Ctx) {
 	// Init config
 	var cfg Config
 	if len(config) > 0 {
