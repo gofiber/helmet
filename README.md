@@ -1,3 +1,9 @@
+# Helmet
+
+![Test](https://github.com/gofiber/helmet/workflows/Test/badge.svg)
+![Security](https://github.com/gofiber/helmet/workflows/Security/badge.svg)
+![Linter](https://github.com/gofiber/helmet/workflows/Linter/badge.svg)
+
 ### Install
 ```
 go get -u github.com/gofiber/fiber
