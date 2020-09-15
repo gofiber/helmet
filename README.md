@@ -8,16 +8,16 @@
 
 ### Install
 ```
-go get -u github.com/gofiber/fiber
-go get -u github.com/gofiber/helmet
+go get -u github.com/gofiber/fiber/v2
+go get -u github.com/gofiber/helmet/v2
 ```
 ### Example
 ```go
 package main
 
 import (
-  "github.com/gofiber/fiber"
-  "github.com/gofiber/helmet"
+  "github.com/gofiber/fiber/v2"
+  "github.com/gofiber/helmet/v2"
 )
 
 func main() {
@@ -25,11 +25,11 @@ func main() {
 
   app.Use(helmet.New())
 
-  app.Get("/", func(c *fiber.Ctx) {
-    c.Send("Welcome!")
+  app.Get("/", func(c *fiber.Ctx) error {
+    return c.SendString("Welcome!")
   })
 
-  app.Listen(3000)
+  app.Listen(":3000")
 }
 ```
 ### Test

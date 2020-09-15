@@ -7,7 +7,7 @@ package helmet
 import (
 	"fmt"
 
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 )
 
 // Config ...
@@ -46,7 +46,7 @@ type Config struct {
 }
 
 // New ...
-func New(config ...Config) func(*fiber.Ctx) {
+func New(config ...Config) fiber.Handler {
 	// Init config
 	var cfg Config
 	if len(config) > 0 {
@@ -63,11 +63,10 @@ func New(config ...Config) func(*fiber.Ctx) {
 		cfg.XFrameOptions = "SAMEORIGIN"
 	}
 	// Return middleware handler
-	return func(c *fiber.Ctx) {
+	return func(c *fiber.Ctx) error {
 		// Filter request to skip middleware
 		if cfg.Filter != nil && cfg.Filter(c) {
-			c.Next()
-			return
+			return c.Next()
 		}
 		if cfg.XSSProtection != "" {
 			c.Set(fiber.HeaderXXSSProtection, cfg.XSSProtection)
@@ -98,6 +97,6 @@ func New(config ...Config) func(*fiber.Ctx) {
 		if cfg.ReferrerPolicy != "" {
 			c.Set(fiber.HeaderReferrerPolicy, cfg.ReferrerPolicy)
 		}
-		c.Next()
+		return c.Next()
 	}
 }
