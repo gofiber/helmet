@@ -43,6 +43,10 @@ type Config struct {
 	// ReferrerPolicy
 	// Optional. Default value "".
 	ReferrerPolicy string
+
+	// Permissions-Policy
+	// Optional. Default value "".
+	PermissionPolicy string
 }
 
 // New ...
@@ -96,6 +100,10 @@ func New(config ...Config) fiber.Handler {
 		}
 		if cfg.ReferrerPolicy != "" {
 			c.Set(fiber.HeaderReferrerPolicy, cfg.ReferrerPolicy)
+		}
+		if cfg.PermissionPolicy != "" {
+			c.Set(fiber.HeaderPermissionsPolicy, cfg.PermissionPolicy)
+
 		}
 		return c.Next()
 	}
