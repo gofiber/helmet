@@ -80,7 +80,7 @@ func New(config ...Config) fiber.Handler {
 		if cfg.XFrameOptions != "" {
 			c.Set(fiber.HeaderXFrameOptions, cfg.XFrameOptions)
 		}
-		if c.Secure() && cfg.HSTSMaxAge != 0 {
+		if c.Protocol() == "https" && cfg.HSTSMaxAge != 0 {
 			subdomains := ""
 			if !cfg.HSTSExcludeSubdomains {
 				subdomains = "; includeSubDomains"
