@@ -84,7 +84,7 @@ func New(config ...Config) fiber.Handler {
 		if (c.Secure() || (c.Get(fiber.HeaderXForwardedProto) == "https")) && cfg.HSTSMaxAge != 0 {
 			subdomains := ""
 			if !cfg.HSTSExcludeSubdomains {
-				subdomains = "; includeSubdomains"
+				subdomains = "; includeSubDomains"
 			}
 			if cfg.HSTSPreloadEnabled {
 				subdomains = fmt.Sprintf("%s; preload", subdomains)
