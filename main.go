@@ -43,7 +43,6 @@ type Config struct {
 	// ReferrerPolicy
 	// Optional. Default value "".
 	ReferrerPolicy string
-
 	// Permissions-Policy
 	// Optional. Default value "".
 	PermissionPolicy string
