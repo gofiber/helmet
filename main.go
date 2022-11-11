@@ -43,7 +43,6 @@ type Config struct {
 	// ReferrerPolicy
 	// Optional. Default value "".
 	ReferrerPolicy string
-
 	// Permissions-Policy
 	// Optional. Default value "".
 	PermissionPolicy string
@@ -81,7 +80,7 @@ func New(config ...Config) fiber.Handler {
 		if cfg.XFrameOptions != "" {
 			c.Set(fiber.HeaderXFrameOptions, cfg.XFrameOptions)
 		}
-		if (c.Secure() || (c.Get(fiber.HeaderXForwardedProto) == "https")) && cfg.HSTSMaxAge != 0 {
+		if c.Secure() && cfg.HSTSMaxAge != 0 {
 			subdomains := ""
 			if !cfg.HSTSExcludeSubdomains {
 				subdomains = "; includeSubdomains"
@@ -103,7 +102,6 @@ func New(config ...Config) fiber.Handler {
 		}
 		if cfg.PermissionPolicy != "" {
 			c.Set(fiber.HeaderPermissionsPolicy, cfg.PermissionPolicy)
-
 		}
 		return c.Next()
 	}
