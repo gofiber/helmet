@@ -8,6 +8,9 @@ updates:
         - "🤖 Dependencies"
     schedule:
         interval: "daily"
-    automerged_updates:
-        -   match:
-                dependency_name: "gofiber/fiber/*"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+        interval: daily
+    labels:
+        - "🤖 Dependencies"
