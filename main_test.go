@@ -23,12 +23,19 @@ func Test_Default(t *testing.T) {
 
 	resp, err := app.Test(httptest.NewRequest("GET", "/", nil))
 	utils.AssertEqual(t, nil, err)
-	utils.AssertEqual(t, "1; mode=block", resp.Header.Get(fiber.HeaderXXSSProtection))
+	utils.AssertEqual(t, "0", resp.Header.Get(fiber.HeaderXXSSProtection))
 	utils.AssertEqual(t, "nosniff", resp.Header.Get(fiber.HeaderXContentTypeOptions))
 	utils.AssertEqual(t, "SAMEORIGIN", resp.Header.Get(fiber.HeaderXFrameOptions))
 	utils.AssertEqual(t, "", resp.Header.Get(fiber.HeaderContentSecurityPolicy))
-	utils.AssertEqual(t, "", resp.Header.Get(fiber.HeaderReferrerPolicy))
+	utils.AssertEqual(t, "no-referrer", resp.Header.Get(fiber.HeaderReferrerPolicy))
 	utils.AssertEqual(t, "", resp.Header.Get(fiber.HeaderPermissionsPolicy))
+	utils.AssertEqual(t, "require-corp", resp.Header.Get("Cross-Origin-Embedder-Policy"))
+	utils.AssertEqual(t, "same-origin", resp.Header.Get("Cross-Origin-Opener-Policy"))
+	utils.AssertEqual(t, "same-origin", resp.Header.Get("Cross-Origin-Resource-Policy"))
+	utils.AssertEqual(t, "?1", resp.Header.Get("Origin-Agent-Cluster"))
+	utils.AssertEqual(t, "off", resp.Header.Get("X-DNS-Prefetch-Control"))
+	utils.AssertEqual(t, "noopen", resp.Header.Get("X-Download-Options"))
+	utils.AssertEqual(t, "none", resp.Header.Get("X-Permitted-Cross-Domain-Policies"))
 }
 
 func Test_Filter(t *testing.T) {
